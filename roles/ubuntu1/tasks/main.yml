@@ -1,0 +1,28 @@
+---
+- name: Change hostname to "ubuntu-freddy"
+  hostname:
+    name: ubuntu-freddy
+
+- name: Create local user ansible
+  user:
+    name: ansible
+    password: "{{ 'ansible' | password_hash('sha512') }}"
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - chrony
+  notify: restart chrony
+
+- name: Remove ntpdate package
+  apt:
+    name: ntpdate
+    state: absent
+
+- name: Add history date to bashrc
+  lineinfile:
+    dest: ~/.bashrc
+    line: "export HISTTIMEFORMAT='%F %T '"

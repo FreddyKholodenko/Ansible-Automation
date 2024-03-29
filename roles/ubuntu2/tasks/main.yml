@@ -1,0 +1,24 @@
+---
+- name: Create directory "Freddy KH" under /tmp
+  file:
+    path: /tmp/Freddy_KH
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - iotop
+    - sysstat
+
+- name: Print distribution version
+  debug:
+    msg: "Distribution version: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+- name: Update OS patches
+  apt:
+    upgrade: yes

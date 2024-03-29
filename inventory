@@ -1,0 +1,9 @@
+[ubuntu1_hosts]
+172.31.88.19
+
+[ubuntu2_hosts]
+172.31.94.61
+
+[ubuntu_servers:children]
+ubuntu1_hosts
+ubuntu2_hosts

@@ -1,0 +1,25 @@
+---
+- name: Configure Ubuntu Servers
+  hosts: ubuntu_servers
+  become: yes
+  become_user: root
+  tasks:
+    - name: Run Ubuntu1 role
+      include_role:
+        name: roles/ubuntu1
+      when: inventory_hostname in groups['ubuntu1_hosts']
+  handlers:
+    - name: restart chrony
+      service:
+        name: chrony
+        state: restarted
+
+- name: Configure Ubuntu2 Servers
+  hosts: ubuntu_servers
+  become: yes
+  become_user: root
+  tasks:
+    - name: Run Ubuntu2 role
+      include_role:
+        name: roles/ubuntu2
+      when: inventory_hostname in groups['ubuntu2_hosts']
