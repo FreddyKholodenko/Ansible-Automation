@@ -1,8 +1,8 @@
 [ubuntu1_hosts]
-172.31.88.19
+<Enter your IP>
 
 [ubuntu2_hosts]
-172.31.94.61
+<Enter your IP>
 
 [ubuntu_servers:children]
 ubuntu1_hosts
